@@ -1,0 +1,84 @@
+# =========================
+# Python general
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Jupyter / IPython
+.ipynb_checkpoints/
+*.ipynb_save
+*.ipynb_checkpoints
+
+# Virtual environments (pip/venv, conda, uv)
+.venv/
+venv/
+env/
+ENV/
+.conda/
+.conda_env/
+*.conda
+*.egg-info/
+uv.lock
+.uv/
+
+# Conda environment files (keep yaml, ignore hidden caches)
+conda-meta/
+pkgs/
+*.conda-build-config.yaml
+
+# pip
+pip-wheel-metadata/
+*.egg
+.eggs/
+
+# =========================
+# Data science artifacts
+# =========================
+# Large data outputs (keep only curated samples in repo)
+data/raw/
+data/interim/
+data/processed/
+models/artifacts/
+models/experiments/
+reports/figures/
+reports/tables/
+
+# Profiling / experiment logs
+*.prof
+*.log
+mlruns/
+wandb/
+lightning_logs/
+
+# =========================
+# IDE / Editor
+# =========================
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs (PyCharm, IntelliJ, etc.)
+.idea/
+*.iml
+out/
+
+# Spyder
+.spyderproject
+.spyproject
+.spyderworkspace
+.spyder-py3/
+
+# Jupyter Lab metadata
+.jupyter/
+
+# =========================
+# OS / Misc
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
