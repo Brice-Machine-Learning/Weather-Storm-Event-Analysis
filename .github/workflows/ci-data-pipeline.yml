@@ -1,0 +1,57 @@
+name: Data Pipeline (Conda)
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  conda-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: false
+          environment-file: environment.yml
+          activate-environment: storm-events
+          python-version: 3.11
+          channels: conda-forge
+          use-mamba: true  # Much faster solver
+
+      - name: Verify environment
+        shell: bash -l {0}
+        run: |
+          conda info
+          conda list
+
+      - name: Lint source code
+        shell: bash -l {0}
+        run: |
+          conda install -c conda-forge ruff -y
+          ruff check src
+
+      - name: Run smoke tests
+        shell: bash -l {0}
+        run: |
+          conda install -c conda-forge pytest -y
+          pytest -v --maxfail=1 --disable-warnings
+
+      - name: Execute sample notebooks
+        shell: bash -l {0}
+        run: |
+          conda install -c conda-forge papermill -y
+          mkdir -p notebooks/_ci_outputs
+          papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb -p SAMPLE_RUN True
+          papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb -p SAMPLE_RUN True
+
+      - name: Upload notebook outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci_notebook_outputs
+          path: notebooks/_ci_outputs/
