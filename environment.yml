@@ -1,7 +1,7 @@
 name: weather_storm_event_predict
 channels:
-  - defaults
   - conda-forge
+  - defaults
   - https://repo.anaconda.com/pkgs/main
   - https://repo.anaconda.com/pkgs/r
 dependencies:
@@ -241,7 +241,7 @@ dependencies:
   - pyqt6-sip=13.9.1=py312h6ce4db3_2
   - pysocks=1.7.1=pyha55dd90_7
   - pytest=8.4.2=pyhd8ed1ab_0
-  - python=3.12.5=h5148396_1
+  - python>=3.12,<3.13
   - python-dateutil=2.9.0.post0=pyhe01879c_2
   - python-fastjsonschema=2.21.2=pyhe01879c_0
   - python-json-logger=2.0.7=pyhd8ed1ab_0
