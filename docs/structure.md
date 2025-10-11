@@ -1,5 +1,6 @@
 # Project Structure
 
+```mermaid
 storm-events-analysis/
 │
 ├── data/
@@ -38,4 +39,4 @@ storm-events-analysis/
 ├── environment.yml
 ├── README.md
 └── .gitignore
-
+```

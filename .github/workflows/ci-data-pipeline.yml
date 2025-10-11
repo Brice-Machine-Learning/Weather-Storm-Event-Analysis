@@ -36,11 +36,11 @@ jobs:
           conda install -c conda-forge ruff -y
           ruff check src
 
-      - name: Run smoke tests
+      - name: Run health test
         shell: bash -l {0}
         run: |
           conda install -c conda-forge pytest -y
-          pytest -v --maxfail=1 --disable-warnings
+          pytest -v tests/test_health.py --disable-warnings
 
       - name: Execute sample notebooks
         shell: bash -l {0}

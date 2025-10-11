@@ -44,11 +44,11 @@ dependencies:
   - brotli-python=1.0.9=py312h6a678d5_9
   - bzip2=1.0.8=h5eee18b_6
   - c-ares=1.34.5=hef5626c_0
-  - ca-certificates=2025.8.3=hbd8a1cb_0
+  - ca-certificates=2025.10.5=hbd8a1cb_0
   - cached-property=1.5.2=hd8ed1ab_1
   - cached_property=1.5.2=pyha770c72_1
   - cairo=1.18.4=h44eff21_0
-  - certifi=2025.8.3=pyhd8ed1ab_0
+  - certifi=2025.10.5=pyhd8ed1ab_0
   - cffi=1.17.1=py312h1fdaa30_1
   - charset-normalizer=3.4.3=pyhd8ed1ab_0
   - cloudpickle=3.1.1=pyhd8ed1ab_0
@@ -93,6 +93,7 @@ dependencies:
   - idna=3.10=pyhd8ed1ab_1
   - imagehash=4.3.1=pyhd8ed1ab_1
   - importlib-metadata=8.7.0=pyhe01879c_1
+  - iniconfig=2.0.0=pyhd8ed1ab_1
   - ipykernel=6.30.1=pyh82676e8_0
   - ipython=9.5.0=pyhfa0c392_0
   - ipython_pygments_lexers=1.1.1=pyhd8ed1ab_0
@@ -220,6 +221,7 @@ dependencies:
   - pixman=0.46.4=h7934f7d_0
   - platformdirs=4.4.0=pyhcf101f3_0
   - plotly=6.3.0=pyhd8ed1ab_0
+  - pluggy=1.6.0=pyhd8ed1ab_0
   - proj=9.3.1=h4591001_1
   - prometheus_client=0.22.1=pyhd8ed1ab_0
   - prompt-toolkit=3.0.52=pyha770c72_0
@@ -238,6 +240,7 @@ dependencies:
   - pyqt=6.7.1=py312h8dad735_2
   - pyqt6-sip=13.9.1=py312h6ce4db3_2
   - pysocks=1.7.1=pyha55dd90_7
+  - pytest=8.4.2=pyhd8ed1ab_0
   - python=3.12.5=h5148396_1
   - python-dateutil=2.9.0.post0=pyhe01879c_2
   - python-fastjsonschema=2.21.2=pyhe01879c_0
@@ -337,4 +340,6 @@ dependencies:
   - zlib=1.2.13=h5eee18b_1
   - zstandard=0.23.0=py312h2c38b39_1
   - zstd=1.5.6=hc292b87_0
+  - pip:
+      - pandas-stubs==2.3.2.250827
 prefix: /home/bnelson_regex/miniconda3/envs/weather_storm_event_predict
