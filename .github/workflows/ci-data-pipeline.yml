@@ -30,6 +30,18 @@ jobs:
           conda info
           conda list
 
+      # ---------------------------------------
+      # CREATE DIRECTORY SKELETON FOR CI TESTS
+      # ---------------------------------------
+      - name: Create required folder structure
+        shell: bash -l {0}
+        run: |
+          mkdir -p data/raw
+          mkdir -p data/interim
+          mkdir -p data/processed
+          mkdir -p models/artifacts
+          mkdir -p reports/figures
+
       # --------------------------
       # LINTING (uses pip installs)
       # --------------------------
