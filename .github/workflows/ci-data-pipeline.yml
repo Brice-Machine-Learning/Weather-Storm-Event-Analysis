@@ -18,11 +18,11 @@ jobs:
         uses: conda-incubator/setup-miniconda@v3
         with:
           auto-activate-base: false
-          environment-file: environment.yml
+          environment-file: environment_gh_actions.yml
           activate-environment: storm-events
-          python-version: 3.11
           channels: conda-forge
-          use-mamba: true  # Much faster solver
+          python-version: 3.12
+          use-mamba: true
 
       - name: Verify environment
         shell: bash -l {0}
@@ -30,22 +30,43 @@ jobs:
           conda info
           conda list
 
-      - name: Lint source code
+      # --------------------------
+      # LINTING (uses pip installs)
+      # --------------------------
+      - name: Install lint tools
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge ruff -y
+          pip install ruff
+
+      - name: Run linters
+        shell: bash -l {0}
+        run: |
           ruff check src
 
-      - name: Run health test
+      # --------------------------
+      # TESTING
+      # --------------------------
+      - name: Install test tools
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge pytest -y
+          pip install pytest pytest-cov
+
+      - name: Run health checks
+        shell: bash -l {0}
+        run: |
           pytest -v tests/test_health.py --disable-warnings
+
+      # --------------------------
+      # NOTEBOOK EXECUTION
+      # --------------------------
+      - name: Install notebook tooling
+        shell: bash -l {0}
+        run: |
+          pip install papermill
 
       - name: Execute sample notebooks
         shell: bash -l {0}
         run: |
-          conda install -c conda-forge papermill -y
           mkdir -p notebooks/_ci_outputs
           papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb -p SAMPLE_RUN True
           papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb -p SAMPLE_RUN True

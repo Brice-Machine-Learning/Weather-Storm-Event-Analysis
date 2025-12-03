@@ -1,57 +1,89 @@
-# 🌪 Storm Events Analysis (NOAA)
+# 🌪️ Storm Events Analysis (NOAA)
+_Advanced ML Pipeline for Extreme Weather Risk Modeling_
 
-This project explores and models NOAA Storm Events data (hurricanes, floods, tornadoes, etc.).  
-It combines **data science (EDA, visualization, trend analysis)** with **machine learning (damage prediction, risk modeling)**.
-
----
-
-## 📌 Project Scope (High-Level)
-- **Hazard separation**: Run **separate models** for floods, hurricanes, and tornadoes.  
-- **Cost normalization**: Convert all damage values to **2025 USD** using CPI/GDP deflators.  
-- **Training cutoff**: Use **1996 onward** for baseline models (higher data quality).  
-- **Deliverables**: Hazard-specific datasets, normalized costs, trained models, and a `model_card.md`.
+![Status: In Progress](https://img.shields.io/badge/Status-In%20Progress-yellow?style=flat-square)
+![Dataset Size: Massive](https://img.shields.io/badge/Dataset-215%20Files%20%7C%2025M%2B%20Rows-red?style=flat-square)
+![Framework: Python](https://img.shields.io/badge/Framework-Python%203.12-blue?style=flat-square)
+![Tools: Pandas | DuckDB | Scikit-Learn](https://img.shields.io/badge/Tools-Pandas%20%7C%20DuckDB%20%7C%20Scikit--Learn-green?style=flat-square)
+![Hazards: Floods | Hurricanes | Tornadoes](https://img.shields.io/badge/Hazards-Floods%20%7C%20Hurricanes%20%7C%20Tornadoes-orange?style=flat-square)
 
 ---
 
-## 🧹 Cleaning & Pipeline Highlights
-- **Cleaning rules**:  
-  - Drop duplicates, fix missing values, standardize types.  
-  - Event-specific checks (wind units, EF scale, rainfall bins).  
-  - Normalize damage multipliers (`K/M/B`) and convert to USD.  
-  - Standardize geographies (FIPS codes) and flag outliers.  
+## 🧭 Project Overview
+This project analyzes and models the **NOAA Storm Events Database**, focusing on major U.S. hazards: **floods**, **hurricanes**, and **tornadoes**.  
+The goal is to produce hazard-specific models that estimate property damage risk after normalizing all costs to **2025 USD**.
 
-- **Data pipeline**:  
-  1. Download & log raw NOAA files → `data/raw/`.  
-  2. Merge yearly files → `data/interim/master_events.parquet`.  
-  3. Split into hazard subsets (`floods`, `hurricanes`, `tornadoes`).  
-  4. Apply cost normalization + feature engineering.  
-  5. Train/tune models per hazard.  
-  6. Export artifacts + reports + `model_card.md`.  
+The pipeline follows a clear data lineage (raw → interim → processed), aligns with reproducible research standards, and uses modular notebooks and helper scripts to keep the workflow clean and maintainable.
 
 ---
 
-## 📂 Project Structure
-- `data/` → raw, interim, and processed datasets  
-- `notebooks/` → numbered Jupyter notebooks for analysis pipeline  
-- `reports/` → saved figures, tables, and summary write-ups  
-- `models/` → trained model artifacts and experiment logs  
-- `src/` → reusable helper scripts (data cleaning, viz, feature engineering)  
-- `tests/` → unit tests for helper functions  
+## 🎯 High-Level Scope
+- **Event separation** — Floods, hurricanes, and tornadoes processed independently  
+- **Cost normalization** — CPI adjustment to 2025 USD  
+- **Training cutoff (1996+)** — Focus on modern, higher-quality records  
+- **Artifacts** — Clean datasets, feature tables, trained models, reports, model card
 
 ---
 
-## 🚀 Workflow
-1. `00_data_download.ipynb` → Download/extract NOAA datasets  
-2. `01_data_quality_profiling.ipynb` → Assess missingness, odd values  
-3. `02_eda_overview.ipynb` → Global trends, correlations  
-4. `03_geo_eda_mapping.ipynb` → Geographic mapping & heatmaps  
-5. `04_feature_engineering.ipynb` → Build ML features  
-6. `05_baseline_models.ipynb` → Quick baseline models  
-7. `06_model_tuning_and_selection.ipynb` → Model optimization  
-8. `07_error_analysis_and_bias_checks.ipynb` → Evaluate fairness & errors  
-9. `08_risk_scoring_and_thresholds.ipynb` → Convert predictions into categories  
-10. `09_reporting_figures_and_tables.ipynb` → Generate final plots/tables  
-11. `10_export_artifacts.ipynb` → Save models, datasets, and docs  
+## 🧹 Cleaning & Quality Rules
+### General Rules
+- Remove duplicate EVENT_ID entries  
+- Standardize data types  
+- Handle missing identifiers  
+- Validate FIPS, coordinates, and event codes  
+
+### Hazard‑Specific Checks
+- **Floods:** rainfall/depth consistency  
+- **Hurricanes:** wind units + storm name validation  
+- **Tornadoes:** EF-scale and path geometry  
+
+### Damage Processing
+- Parse K/M/B multipliers  
+- Normalize to 2025 USD  
+- Merge fatalities & injuries safely  
+
+---
+
+## 🔄 Pipeline Workflow
+1. **00_data_download** — Download raw files  
+2. **01_data_quality_profiling** — Missingness, duplicates, cutoff decision  
+3. **Master merge** — Build `master_events.parquet`  
+4. **Hazard filtering** — Floods, hurricanes, tornadoes subsets  
+5. **Feature engineering** — Hazard bins + CPI normalization  
+6. **Modeling** — Baselines → tuning → selection  
+7. **Error & bias analysis**  
+8. **Risk scoring**  
+9. **Reporting + artifact export**  
+
+---
+
+## 📂 Repository Structure
+
+For full structure, see `docs/01_architecture/01_project_structure.md`  
+Summarized structure:
+
+```plaintext
+storm-events-analysis/
+│
+├── data/                 # raw, interim, processed
+├── notebooks/            # 00–10 pipeline
+├── reports/              # figs, tables, summaries
+├── models/               # experiments + artifacts
+├── src/                  # reusable utilities
+└── tests/                # health checks
+```
+
+---
+
+## 📘 Notebook Roles
+- `00` → data acquisition  
+- `01` → profiling  
+- `02–03` → EDA + geospatial  
+- `04` → hazard splits + FE  
+- `05–06` → modeling  
+- `07` → error/bias  
+- `08` → risk scoring  
+- `09–10` → reporting + export  
 
 ---
 
@@ -59,3 +91,24 @@ It combines **data science (EDA, visualization, trend analysis)** with **machine
 ```bash
 conda env create -f environment.yml
 conda activate storm-events
+```
+
+---
+
+## 📑 Documentation & Outputs
+- Figures, tables, model artifacts  
+- Model card  
+- Processed feature datasets  
+- Hazard-specific parquet files  
+
+---
+
+## 📫 Contact
+
+If you’d like to connect, collaborate, or discuss the project:
+
+- **Email:** [brice@devbybrice.com](mailto:brice@devbybrice.com)
+- **LinkedIn:** [linkedin.com/in/brice-a-nelson-p-e-mba-36b28b15](https://www.linkedin.com/in/brice-a-nelson-p-e-mba-36b28b15/)
+- **Website:** [devbybrice.com](https://www.devbybrice.com)
+
+
