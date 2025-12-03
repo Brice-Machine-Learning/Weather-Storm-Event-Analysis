@@ -94,6 +94,6 @@ feat:, fix:, docs:, ci:, refactor:, test:
 ---
 
 ## 📫 Contact
-- Email: brice.nelson.ce@gmail.com  
+- Email: brice@devbybrice.com  
 - LinkedIn: https://www.linkedin.com/in/brice-nelson  
 - Website: https://www.devbybrice.com

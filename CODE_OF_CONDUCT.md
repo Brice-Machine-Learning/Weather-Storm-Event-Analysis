@@ -11,4 +11,4 @@ We aim to maintain a professional, respectful, and collaborative environment.
 
 ## Enforcement
 Violations may be reported to the project maintainers at:
-**brice.nelson.ce@gmail.com**
+**brice@devbybrice.com**
