@@ -27,9 +27,9 @@ def test_src_imports():
     modules = ["io_utils", "clean_utils", "fe_utils", "viz_utils"]
     for mod in modules:
         try:
-            importlib.import_module(f"src.{mod}")
+            importlib.import_module(f"src.utils.{mod}")
         except Exception as e:
-            pytest.fail(f"Import failed for src.{mod}: {e}")
+            pytest.fail(f"Import failed for src.utils.{mod}: {e}")
 
 def test_readme_present():
     """Ensure a main README.md file exists."""
