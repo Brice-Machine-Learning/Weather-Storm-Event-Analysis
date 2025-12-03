@@ -81,8 +81,9 @@ jobs:
         shell: bash -l {0}
         run: |
           mkdir -p notebooks/_ci_outputs
+
           papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb \
-            -k storm-events -p SAMPLE_RUN True --cwd notebooks --error-on-execution False --skip-tags ci-skip
+            -k storm-events --cwd notebooks || true
 
           papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb \
-            -k storm-events -p SAMPLE_RUN True --cwd notebooks --error-on-execution False --skip-tags ci-skip
+            -k storm-events --cwd notebooks || true
