@@ -1,0 +1,7 @@
+# Global code owner for all files
+*   @Brice-Machine-Learning
+
+# Optional: specify ownership for certain folders
+src/                       @Brice-Machine-Learning
+notebooks/                 @Brice-Machine-Learning
+docs/                      @Brice-Machine-Learning
