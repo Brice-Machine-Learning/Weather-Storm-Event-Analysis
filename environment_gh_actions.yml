@@ -1,0 +1,17 @@
+name: storm-events
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - python=3.12
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - seaborn
+  - statsmodels
+  - scikit-learn
+  - pip
+  - pip:
+      - duckdb

@@ -1,6 +1,19 @@
 # Project Structure
 
+```mermaid
 storm-events-analysis/
+│
+├── .github/
+│   │
+│   ├── workflows/               # workflows
+│   │   └── ci-data-pipeline.yml # ci workflow
+│   │
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   │
+│   └── ISSUE_TEMPLATE/
+│       ├── bug_report.md
+│       ├── feature_request.md
+│       └── documentation_update.md
 │
 ├── data/
 │   ├── raw/               # untouched source files (NOAA CSV/TXT)
@@ -30,12 +43,18 @@ storm-events-analysis/
 │   └── artifacts/         # serialized models, preprocessors
 │
 ├── src/                   # optional helpers used by notebooks
-│   ├── io_utils.py        # load/save helpers (paths central)
-│   ├── clean_utils.py     # NOAA-specific cleaning functions
-│   ├── fe_utils.py        # feature engineering utilities
-│   └── viz_utils.py       # plotting helpers (maps, facets)
+│   ├── data/              # data
+│   ├── models/            # models
+│   └── utils/             # utilities
+│       ├── io_utils.py        # load/save helpers (paths central)
+│       ├── clean_utils.py     # NOAA-specific cleaning functions
+│       ├── fe_utils.py        # feature engineering utilities
+│       └── viz_utils.py       # plotting helpers (maps, facets)
 │
+├── tests/                   # tests
+│   ├── __init__.py       # test folder initialization
+│   └── test_health       # smoke test
 ├── environment.yml
 ├── README.md
 └── .gitignore
-
+```

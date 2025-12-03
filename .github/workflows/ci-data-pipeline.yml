@@ -1,0 +1,89 @@
+name: Data Pipeline (Conda)
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  conda-ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: false
+          environment-file: environment_gh_actions.yml
+          activate-environment: storm-events
+          channels: conda-forge
+          python-version: 3.12
+          use-mamba: true
+
+      - name: Verify environment
+        shell: bash -l {0}
+        run: |
+          conda info
+          conda list
+
+      # ---------------------------------------
+      # CREATE DIRECTORY SKELETON FOR CI TESTS
+      # ---------------------------------------
+      - name: Create required folder structure
+        shell: bash -l {0}
+        run: |
+          mkdir -p data/raw
+          mkdir -p data/interim
+          mkdir -p data/processed
+          mkdir -p models/artifacts
+          mkdir -p reports/figures
+
+      # --------------------------
+      # LINTING
+      # --------------------------
+      - name: Install lint tools
+        shell: bash -l {0}
+        run: |
+          pip install ruff
+
+      - name: Run linters
+        shell: bash -l {0}
+        run: |
+          ruff check src
+
+      # --------------------------
+      # TESTING
+      # --------------------------
+      - name: Install test tools
+        shell: bash -l {0}
+        run: |
+          pip install pytest pytest-cov
+
+      - name: Run health checks
+        shell: bash -l {0}
+        run: |
+          pytest -v tests/test_health.py --disable-warnings
+
+      # --------------------------
+      # NOTEBOOK EXECUTION
+      # --------------------------
+      - name: Install notebook tooling
+        shell: bash -l {0}
+        run: |
+          pip install papermill ipykernel
+          python -m ipykernel install --user --name storm-events --display-name "Storm Events Kernel"
+
+      - name: Execute sample notebooks
+        shell: bash -l {0}
+        run: |
+          mkdir -p notebooks/_ci_outputs
+
+          papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb \
+            -k storm-events --cwd notebooks || true
+
+          papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb \
+            -k storm-events --cwd notebooks || true
