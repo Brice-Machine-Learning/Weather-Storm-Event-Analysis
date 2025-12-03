@@ -6,7 +6,7 @@ _Advanced ML Pipeline for Extreme Weather Risk Modeling_
 ![Framework: Python](https://img.shields.io/badge/Framework-Python%203.12-blue?style=flat-square)
 ![Tools: Pandas | DuckDB | Scikit-Learn](https://img.shields.io/badge/Tools-Pandas%20%7C%20DuckDB%20%7C%20Scikit--Learn-green?style=flat-square)
 ![Hazards: Floods | Hurricanes | Tornadoes](https://img.shields.io/badge/Hazards-Floods%20%7C%20Hurricanes%20%7C%20Tornadoes-orange?style=flat-square)
-![CI Status](https://github.com/Brice-Repo-Name/storm-events-analysis/actions/workflows/ci-data-pipeline.yml/badge.svg)
+![CI Status](https://github.com/Brice-Machine-Learning/Weather-Storm-Event-Analysis/actions/workflows/ci-data-pipeline.yml/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 ![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
 ![Contributions Welcome](https://img.shields.io/badge/Contributions-Welcome-brightgreen.svg)
