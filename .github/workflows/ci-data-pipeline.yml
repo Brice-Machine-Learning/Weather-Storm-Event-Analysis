@@ -43,7 +43,7 @@ jobs:
           mkdir -p reports/figures
 
       # --------------------------
-      # LINTING (uses pip installs)
+      # LINTING
       # --------------------------
       - name: Install lint tools
         shell: bash -l {0}
@@ -74,14 +74,15 @@ jobs:
       - name: Install notebook tooling
         shell: bash -l {0}
         run: |
-          pip install papermill
+          pip install papermill ipykernel
+          python -m ipykernel install --user --name storm-events --display-name "Storm Events Kernel"
 
       - name: Execute sample notebooks
         shell: bash -l {0}
         run: |
           mkdir -p notebooks/_ci_outputs
-          papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb -p SAMPLE_RUN True
-          papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb -p SAMPLE_RUN True
+          papermill notebooks/00_data_download.ipynb notebooks/_ci_outputs/00_data_download_out.ipynb -k storm-events
+          papermill notebooks/01_data_quality_profiling.ipynb notebooks/_ci_outputs/01_data_quality_profiling_out.ipynb -k storm-events
 
       - name: Upload notebook outputs
         uses: actions/upload-artifact@v4
